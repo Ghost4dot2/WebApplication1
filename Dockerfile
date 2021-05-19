@@ -1,5 +1,8 @@
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /source
 
-COPY bin/Release/net5.0/publish/ App/
-WORKDIR /App
-ENTRYPOINT ["dotnet", "WebApplication1.dll"]
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
+WORKDIR /app
+COPY published/ app/
+ENTRYPOINT ["dotnet", "app/WebApplication1.dll"]
