@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 
 namespace WebApplication1
 {
@@ -21,6 +22,14 @@ namespace WebApplication1
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+
+                    webBuilder.ConfigureAppConfiguration((ctx, cb) =>
+                    {
+                        if (!ctx.HostingEnvironment.IsDevelopment())
+                        {
+                            StaticWebAssetsLoader.UseStaticWebAssets(ctx.HostingEnvironment, ctx.Configuration);
+                        }
+                    });
                 });
     }
 }
