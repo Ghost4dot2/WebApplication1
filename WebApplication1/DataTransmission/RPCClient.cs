@@ -126,7 +126,7 @@ namespace WebApplication1.DataTransmission
 
         public List<T> ToListAsync<T>()
         {
-            string message = "List";
+            string message = "List#";
             string response = SendMessage(message);
             string[] words = response.Split("#");
 
